@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SentinelRetail — Cybersecurity SaaS B2B para varejo e e-commerce.">
+  <title>SentinelRetail | Cybersecurity SaaS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- AUTH -->
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-glow glow-one"></div>
+    <div class="auth-glow glow-two"></div>
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="brand-mark">S</div>
+        <div><strong>Sentinel<span>Retail</span></strong><small>CYBERSECURITY SaaS</small></div>
+      </div>
+      <div id="loginForm" class="auth-form">
+        <p class="eyebrow">SECURE ACCESS</p>
+        <h1>Entrar na plataforma</h1>
+        <p class="muted">Acesse o centro de operações de segurança da sua empresa.</p>
+        <label>E-mail<input id="loginEmail" type="email" value="admin@acmestore.com" placeholder="voce@empresa.com"></label>
+        <label>Senha<div class="password-wrap"><input id="loginPassword" type="password" value="sentinel123" placeholder="••••••••"><button type="button" id="togglePassword">◉</button></div></label>
+        <div class="form-row"><label class="check"><input type="checkbox" checked> Lembrar acesso</label><button class="link-button" type="button">Esqueci minha senha</button></div>
+        <button class="primary-button full" id="loginButton">Entrar no SentinelRetail <span>→</span></button>
+        <p class="auth-switch">Ainda não possui uma organização? <button class="link-button" data-auth="register">Criar empresa</button></p>
+      </div>
+
+      <div id="registerForm" class="auth-form hidden">
+        <p class="eyebrow">ONBOARDING</p>
+        <h1>Cadastre sua empresa</h1>
+        <p class="muted">Crie um ambiente de demonstração para o seu time de segurança.</p>
+        <div class="form-grid">
+          <label>Empresa<input id="companyName" placeholder="Nome da empresa"></label>
+          <label>CNPJ<input placeholder="00.000.000/0001-00"></label>
+        </div>
+        <label>E-mail corporativo<input type="email" placeholder="seguranca@empresa.com"></label>
+        <label>Senha<input type="password" placeholder="Crie uma senha forte"></label>
+        <label class="check"><input type="checkbox" checked> Aceito os termos de uso da plataforma</label>
+        <button class="primary-button full" id="registerButton">Criar ambiente <span>→</span></button>
+        <p class="auth-switch">Já possui acesso? <button class="link-button" data-auth="login">Voltar para login</button></p>
+      </div>
+      <div class="auth-footer"><span class="status-dot"></span> Ambiente protegido • MVP Demo</div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <div class="app-shell hidden" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div><strong>Sentinel<span>Retail</span></strong><small>CYBERSECURITY SaaS</small></div>
+      </div>
+      <nav class="nav">
+        <p class="nav-label">MONITORAMENTO</p>
+        <button class="nav-item active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-item" data-page="incidents"><span>⚠</span> Incidentes <b class="nav-badge">4</b></button>
+        <button class="nav-item" data-page="events"><span>◉</span> Eventos</button>
+        <button class="nav-item" data-page="devices"><span>▣</span> Dispositivos</button>
+        <p class="nav-label">PLATAFORMA</p>
+        <button class="nav-item" data-page="integrations"><span>⌘</span> Integrações</button>
+        <button class="nav-item" data-page="api"><span>⌁</span> API</button>
+        <button class="nav-item" data-page="docs"><span>▤</span> Documentação</button>
+        <button class="nav-item" data-page="reports"><span>◫</span> Relatórios</button>
+        <p class="nav-label">GESTÃO</p>
+        <button class="nav-item" data-page="settings"><span>⚙</span> Configurações</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="system-status"><span class="status-dot"></span><div><strong>Todos os sistemas</strong><small>Operacional</small></div></div>
+        <div class="user-card"><div class="avatar">AK</div><div class="user-info"><strong>Admin</strong><small>Security Admin</small></div><button class="icon-button">⋮</button></div>
+        <button class="logout-button" id="logoutButton">↪ Sair</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="top-left"><button class="mobile-menu" id="mobileMenu">☰</button><div class="breadcrumb"><span>SentinelRetail</span><i>/</i><strong id="pageTitle">Dashboard</strong></div></div>
+        <div class="top-actions">
+          <div class="connection"><span class="status-dot"></span> API conectada</div>
+          <button class="theme-button" id="themeButton" title="Alternar tema">☾</button>
+          <button class="icon-button notification-button" id="notificationButton">♢<span class="notification-dot"></span></button>
+          <div class="company-selector"><span class="company-logo">A</span><span>ACME Store</span><span>⌄</span></div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- DASHBOARD -->
+        <div class="page active-page" id="dashboard">
+          <div class="page-heading">
+            <div><p class="eyebrow">VISÃO GERAL DE SEGURANÇA</p><h1>Bom dia, Admin.</h1><p class="muted">Resumo de segurança e risco da sua organização.</p></div>
+            <button class="primary-button" id="scanButton">↻ Executar análise</button>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card risk-card">
+              <div class="stat-top"><span>Risco geral</span><span class="trend positive">↑ 4.2%</span></div>
+              <div class="risk-content"><div class="risk-ring" style="--score:72"><div><strong>72</strong><small>/100</small></div></div><div><strong class="risk-label">Bom</strong><p>Melhor que 68% das empresas monitoradas.</p></div></div>
+            </article>
+            <article class="stat-card"><div class="stat-top"><span>Incidentes ativos</span><span class="stat-icon red">⚠</span></div><div class="stat-number">4</div><div class="stat-footer"><span class="red-text">2 críticos</span><span>↑ 1 hoje</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Eventos processados</span><span class="stat-icon blue">◉</span></div><div class="stat-number" id="eventCount">18,432</div><div class="stat-footer"><span class="green-text">+12.8%</span><span>últimas 24h</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Dispositivos</span><span class="stat-icon purple">▣</span></div><div class="stat-number">24</div><div class="stat-footer"><span class="green-text">22 online</span><span>2 offline</span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel chart-panel">
+              <div class="panel-header"><div><h2>Atividade de eventos</h2><p>Eventos de segurança nas últimas 24 horas</p></div><select id="chartRange"><option>Últimas 24h</option><option>Últimos 7 dias</option></select></div>
+              <div class="chart-container"><canvas id="eventsChart"></canvas></div>
+            </article>
+            <article class="panel">
+              <div class="panel-header"><div><h2>Risk Score</h2><p>Evolução da postura de segurança</p></div><span class="score-up">+6 pts</span></div>
+              <div class="risk-history"><div class="history-score"><strong>72</strong><span>/100</span></div><div class="sparkline"><canvas id="riskChart"></canvas></div></div>
+              <div class="score-factors"><div><span>Identidade</span><strong>84%</strong></div><div><span>Endpoints</span><strong>71%</strong></div><div><span>API</span><strong>92%</strong></div><div><span>Incidentes</span><strong>63%</strong></div></div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid bottom-grid">
+            <article class="panel"><div class="panel-header"><div><h2>Incidentes recentes</h2><p>Últimas ocorrências detectadas pelo Risk Engine</p></div><button class="text-button" data-page-link="incidents">Ver todos →</button></div><div class="table-wrap"><table><thead><tr><th>Incidente</th><th>Origem</th><th>Severidade</th><th>Risco</th><th>Status</th><th>Tempo</th></tr></thead><tbody id="incidentTable"></tbody></table></div></article>
+            <article class="panel"><div class="panel-header"><div><h2>Atividade</h2><p>Eventos recentes</p></div></div><div class="activity-feed" id="activityFeed"></div></article>
+          </div>
+        </div>
+
+        <!-- INCIDENTS -->
+        <div class="page" id="incidents">
+          <div class="page-heading"><div><p class="eyebrow">SECURITY OPERATIONS</p><h1>Incidentes</h1><p class="muted">Investigue, classifique e resolva ocorrências.</p></div><button class="primary-button" id="newIncident">+ Novo incidente</button></div>
+          <article class="panel"><div class="toolbar"><div class="search-box">⌕ <input id="incidentSearch" placeholder="Pesquisar incidentes..."></div><select id="severityFilter"><option value="all">Todas as severidades</option><option value="critical">Crítico</option><option value="high">Alto</option><option value="medium">Médio</option><option value="low">Baixo</option></select></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Incidente</th><th>Origem</th><th>Severidade</th><th>Risco</th><th>Status</th><th>Detectado</th></tr></thead><tbody id="incidentsFullTable"></tbody></table></div></article>
+        </div>
+
+        <!-- EVENTS -->
+        <div class="page" id="events">
+          <div class="page-heading"><div><p class="eyebrow">EVENT MONITORING</p><h1>Eventos</h1><p class="muted">Fluxo de eventos recebido pelas integrações.</p></div><button class="secondary-button" id="simulateEvent">＋ Simular evento</button></div>
+          <article class="panel"><div class="toolbar"><div class="search-box">⌕ <input id="eventSearch" placeholder="Buscar por usuário, IP ou evento..."></div><select><option>Todos os tipos</option><option>LOGIN_FAILED</option><option>LOGIN_SUCCESS</option><option>API_ACCESS</option></select></div><div class="table-wrap"><table><thead><tr><th>Horário</th><th>Tipo</th><th>Origem</th><th>Usuário</th><th>IP</th><th>Severidade</th><th>Score</th></tr></thead><tbody id="eventsTable"></tbody></table></div></article>
+        </div>
+
+        <!-- DEVICES -->
+        <div class="page" id="devices">
+          <div class="page-heading"><div><p class="eyebrow">ENDPOINT SECURITY</p><h1>Dispositivos</h1><p class="muted">Dispositivos conectados ao Sentinel Agent.</p></div><button class="primary-button" id="addDevice">+ Adicionar dispositivo</button></div><div class="device-grid" id="deviceGrid"></div>
+        </div>
+
+        <!-- INTEGRATIONS -->
+        <div class="page" id="integrations">
+          <div class="page-heading"><div><p class="eyebrow">HYBRID INTEGRATION</p><h1>Integrações</h1><p class="muted">Conecte e-commerce, APIs e infraestrutura interna.</p></div></div>
+          <div class="integration-grid">
+            <article class="integration-card"><span class="integration-icon">⌘</span><h3>REST API</h3><p>Envie eventos de autenticação, pedidos, pagamentos e atividades para o Event Engine.</p><span class="connected">● Disponível</span><button class="secondary-button" data-page-link="api">Gerenciar API</button></article>
+            <article class="integration-card"><span class="integration-icon">▣</span><h3>Sentinel Agent</h3><p>Monitore endpoints, PDVs e servidores dentro da rede da empresa.</p><span class="connected">● 22 conectados</span><button class="primary-button">Configurar agente</button></article>
+            <article class="integration-card"><span class="integration-icon">🛒</span><h3>E-commerce</h3><p>Integre login, pedidos, checkout e sinais de fraude ao SentinelRetail.</p><span class="warning">● Não configurado</span><button class="secondary-button">Configurar</button></article>
+          </div>
+        </div>
+
+        <!-- API -->
+        <div class="page" id="api">
+          <div class="page-heading"><div><p class="eyebrow">DEVELOPER PLATFORM</p><h1>API & Webhooks</h1><p class="muted">Controle as credenciais usadas para enviar eventos ao SentinelRetail.</p></div><button class="primary-button" id="createKey">+ Criar API Key</button></div>
+          <div class="api-layout">
+            <article class="panel api-key-panel"><div class="panel-header"><div><h2>Chaves de API</h2><p>Use uma chave diferente para cada integração.</p></div><span class="badge low">PRODUÇÃO</span></div><div class="api-key-row"><div><strong>ecommerce-prod</strong><span>Último uso: há 2 min</span></div><code>sr_live_••••••••••••4A9F</code><button class="icon-button copy-key" data-copy="sr_live_demo_4A9F">⧉</button><span class="key-status">Ativa</span></div><div class="api-key-row"><div><strong>sentinel-agent</strong><span>Último uso: há 8 seg</span></div><code>sr_agent_••••••••••••9K21</code><button class="icon-button copy-key" data-copy="sr_agent_demo_9K21">⧉</button><span class="key-status">Ativa</span></div></article>
+            <article class="panel"><div class="panel-header"><div><h2>Webhook</h2><p>Receba alertas de incidentes no seu sistema.</p></div></div><label class="field-label">Endpoint<input value="https://api.acmestore.com/security/webhook"></label><label class="field-label">Eventos<select><option>Todos os eventos críticos</option><option>Somente incidentes</option><option>Somente autenticação</option></select></label><button class="primary-button" id="saveWebhook">Salvar configuração</button></article>
+          </div>
+          <article class="panel code-panel"><div class="panel-header"><div><h2>Exemplo rápido</h2><p>Envie um evento para o Event Engine.</p></div><button class="icon-button" id="copyCode">⧉ Copiar</button></div><pre><code>POST /api/v1/events
+Authorization: Bearer sr_live_YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "type": "LOGIN_FAILED",
+  "source": "ecommerce",
+  "userId": "user_1042",
+  "ip": "185.23.91.14",
+  "metadata": {
+    "attempts": 7
+  }
+}</code></pre></article>
+        </div>
+
+        <!-- DOCS -->
+        <div class="page" id="docs">
+          <div class="page-heading"><div><p class="eyebrow">DEVELOPER DOCS</p><h1>Documentação da API</h1><p class="muted">Referência para integrar o SentinelRetail ao seu e-commerce e infraestrutura.</p></div><button class="secondary-button" id="copyDocsUrl">⧉ Copiar URL</button></div>
+          <div class="docs-layout">
+            <aside class="docs-nav"><strong>GUIA</strong><button class="doc-link active">Visão geral</button><button class="doc-link">Autenticação</button><button class="doc-link">Eventos</button><button class="doc-link">Incidentes</button><button class="doc-link">Webhooks</button><strong>API REFERENCE</strong><button class="doc-link">POST /events</button><button class="doc-link">GET /incidents</button><button class="doc-link">GET /devices</button></aside>
+            <article class="panel docs-content"><p class="eyebrow">GETTING STARTED</p><h2>Integre em minutos</h2><p>O SentinelRetail recebe eventos de segurança por REST API. O Event Engine normaliza os dados e o Risk Engine atribui um score de risco.</p><h3>1. Crie uma API Key</h3><p>Na página de API, crie uma credencial específica para o seu ambiente.</p><h3>2. Envie eventos</h3><pre><code>curl -X POST https://api.sentinelretail.local/api/v1/events \
+-H "Authorization: Bearer sr_live_YOUR_KEY" \
+-H "Content-Type: application/json" \
+-d '{"type":"LOGIN_FAILED","source":"ecommerce"}'</code></pre><h3>3. Consulte os incidentes</h3><p>Eventos de alta confiança podem gerar incidentes automaticamente. Use os endpoints de incidentes para acompanhar investigação e resolução.</p><div class="doc-note">ℹ️ <strong>Segurança:</strong> nunca exponha uma API Key no frontend do seu e-commerce.</div></article>
+          </div>
+        </div>
+
+        <!-- REPORTS -->
+        <div class="page" id="reports">
+          <div class="page-heading"><div><p class="eyebrow">SECURITY INTELLIGENCE</p><h1>Relatórios</h1><p class="muted">Resumo executivo da postura de segurança.</p></div><button class="primary-button" id="generateReport">↓ Gerar relatório</button></div>
+          <div class="report-grid"><article class="panel"><h2>Security Posture Score</h2><div class="big-score">78<span>/100</span></div><p class="muted">Boa postura geral, com pontos de melhoria em dispositivos e resposta a incidentes.</p><div class="progress large"><i style="width:78%"></i></div></article><article class="panel"><h2>Recomendações</h2><div class="recommendation">⚠ <div><strong>Ative MFA para administradores</strong><p>3 contas administrativas ainda não utilizam autenticação multifator.</p></div></div><div class="recommendation">⚠ <div><strong>Verifique dispositivos offline</strong><p>2 dispositivos estão sem heartbeat há mais de 24 horas.</p></div></div><div class="recommendation ok">✓ <div><strong>API protegida</strong><p>As integrações ativas utilizam autenticação por API Key.</p></div></div></article></div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="page" id="settings">
+          <div class="page-heading"><div><p class="eyebrow">ORGANIZATION</p><h1>Configurações</h1><p class="muted">Preferências da organização e segurança da conta.</p></div></div>
+          <article class="panel settings-panel"><div class="setting-row"><div><strong>Autenticação multifator</strong><p>Exigir MFA para usuários administrativos.</p></div><label class="switch"><input type="checkbox" checked><span></span></label></div><div class="setting-row"><div><strong>Alertas críticos</strong><p>Receber notificações quando um incidente crítico for detectado.</p></div><label class="switch"><input type="checkbox" checked><span></span></label></div><div class="setting-row"><div><strong>Detecção automática</strong><p>Executar regras do Risk Engine continuamente.</p></div><label class="switch"><input type="checkbox" checked><span></span></label></div><div class="setting-row"><div><strong>Modo demonstração</strong><p>Utilizar dados simulados para apresentação do MVP.</p></div><label class="switch"><input type="checkbox" checked><span></span></label></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- INCIDENT DETAIL MODAL -->
+  <div class="modal-overlay" id="incidentModal">
+    <div class="modal incident-modal">
+      <button class="modal-close" data-close-modal>×</button>
+      <div class="modal-heading"><div><span class="badge critical">CRÍTICO</span><p class="modal-id">INCIDENTE #1042</p><h2>Possível comprometimento de conta</h2><p class="muted">Detectado pelo Risk Engine • há 2 minutos</p></div><div class="modal-risk"><strong>87</strong><span>Risk Score</span></div></div>
+      <div class="incident-summary"><div><span>Origem</span><strong>E-commerce</strong></div><div><span>Usuário</span><strong>admin@acmestore.com</strong></div><div><span>IP suspeito</span><strong class="mono">185.23.91.14</strong></div><div><span>Tentativas</span><strong>7 em 4 min</strong></div></div>
+      <div class="modal-tabs"><button class="modal-tab active">Investigação</button><button class="modal-tab">Linha do tempo</button><button class="modal-tab">Eventos relacionados</button></div>
+      <div class="investigation">
+        <div class="investigation-main"><h3>Análise automática</h3><div class="finding danger"><span>!</span><div><strong>Comportamento anômalo detectado</strong><p>O endereço IP não foi observado anteriormente e apresentou múltiplas falhas de autenticação.</p></div></div><div class="finding"><span>i</span><div><strong>Contexto de risco</strong><p>O usuário possui privilégios administrativos. O evento recebeu +31 pontos de risco.</p></div></div><div class="finding success"><span>✓</span><div><strong>Credencial ainda não foi confirmada como comprometida</strong><p>Não há evidência de acesso bem-sucedido a partir do IP após as tentativas.</p></div></div></div>
+        <aside class="investigation-actions"><h3>Ações</h3><button class="action-button danger-action" id="blockIp">Bloquear IP</button><button class="action-button" id="forceReset">Forçar reset de senha</button><button class="action-button" id="assignIncident">Atribuir a mim</button><button class="action-button success-action" id="resolveIncident">Marcar como resolvido</button></aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

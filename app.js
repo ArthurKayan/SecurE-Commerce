@@ -42,7 +42,7 @@ function renderIncidents(list=incidents){
 }
 function renderEvents(list=events){const t=document.getElementById("eventsTable");if(!t)return;t.innerHTML=list.map(e=>`<tr><td class="mono">${e[0]}</td><td class="incident-name">${e[1]}</td><td>${e[2]}</td><td>${e[3]}</td><td class="mono">${e[4]}</td><td><span class="badge ${e[5]}">${sev[e[5]]}</span></td><td class="mono">${e[6]}</td></tr>`).join("")}
 function renderDevices(){const g=document.getElementById("deviceGrid");if(!g)return;g.innerHTML=devices.map(d=>`<article class="device-card"><div class="device-head"><div class="device-icon">▣</div><span class="${d[2]==="online"?"online":"offline"}">● ${d[2]==="online"?"Online":"Offline"}</span></div><h3>${d[0]}</h3><p>${d[1]}</p><div class="device-meta"><span>${d[4]}</span><span>${d[3]}</span></div></article>`).join("")}
-function renderActivity(){const f=document.getElementById("activityFeed");if(!f)return;const items=[["⚠","Incidente crítico detectado","Possível comprometimento de conta","2 min"],["◉","1.284 eventos processados","Event Engine","5 min"],["▣","PDV-03 ficou offline","Sentinel Agent","21 min"],["✓","Incidente #1039 resolvido","Admin Portal","38 min"],["⌁","Integração API sincronizada","REST API","1 h"]];f.innerHTML=items.map(x=>`<div class="activity-item"><div class="activity-icon">${x[0]}</div><div><strong>${x[1]}</strong><p>${x[2]}</p></div><span class="activity-time">${x[3]}</span></div>`).join("")}
+function renderActivity(){const f=document.getElementById("activityFeed");if(!f)return;const items=[["⚠","Incidente crítico detectado","Possível comprometimento de conta","2 min"],["◉","1.284 eventos processados","Event Engine","5 min"],["▣","PDV-03 ficou offline","SecurE-Commerce Agent","21 min"],["✓","Incidente #1039 resolvido","Admin Portal","38 min"],["⌁","Integração API sincronizada","REST API","1 h"]];f.innerHTML=items.map(x=>`<div class="activity-item"><div class="activity-icon">${x[0]}</div><div><strong>${x[1]}</strong><p>${x[2]}</p></div><span class="activity-time">${x[3]}</span></div>`).join("")}
 
 function navigate(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active-page"));document.getElementById(page)?.classList.add("active-page");
@@ -67,7 +67,7 @@ function showAuth(type){document.getElementById("loginForm").classList.toggle("h
 
 document.querySelectorAll("[data-auth]").forEach(b=>b.addEventListener("click",()=>showAuth(b.dataset.auth)));
 document.getElementById("togglePassword")?.addEventListener("click",()=>{const i=document.getElementById("loginPassword");i.type=i.type==="password"?"text":"password"});
-document.getElementById("loginButton")?.addEventListener("click",()=>{const b=document.getElementById("loginButton");b.textContent="Autenticando...";setTimeout(()=>{document.getElementById("authScreen").classList.add("hidden");document.getElementById("appShell").classList.remove("hidden");b.innerHTML='Entrar no SentinelRetail <span>→</span>';toast("Login realizado com sucesso.")},700)});
+document.getElementById("loginButton")?.addEventListener("click",()=>{const b=document.getElementById("loginButton");b.textContent="Autenticando...";setTimeout(()=>{document.getElementById("authScreen").classList.add("hidden");document.getElementById("appShell").classList.remove("hidden");b.innerHTML='Entrar no SecurE-Commerce <span>→</span>';toast("Login realizado com sucesso.")},700)});
 document.getElementById("registerButton")?.addEventListener("click",()=>{const name=document.getElementById("companyName").value.trim();if(!name){toast("Informe o nome da empresa.","warning");return}showAuth("login");document.getElementById("loginEmail").value="admin@"+name.toLowerCase().replace(/\s+/g,"")+".com";toast("Ambiente criado. Faça login para continuar.")});
 document.getElementById("logoutButton")?.addEventListener("click",()=>{document.getElementById("appShell").classList.add("hidden");document.getElementById("authScreen").classList.remove("hidden");showAuth("login");toast("Sessão encerrada.","warning")});
 
@@ -81,13 +81,13 @@ document.getElementById("scanButton")?.addEventListener("click",e=>{const b=e.cu
 document.getElementById("notificationButton")?.addEventListener("click",()=>toast("Você possui 4 incidentes ativos.","warning"));
 document.getElementById("simulateEvent")?.addEventListener("click",()=>{const t=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});events.unshift([t,"LOGIN_FAILED","E-commerce","demo-user","203.0.113.42","high",76]);renderEvents();navigate("events");toast("Evento simulado recebido pelo Event Engine.")});
 document.getElementById("generateReport")?.addEventListener("click",()=>toast("Relatório de demonstração gerado."));
-document.getElementById("addDevice")?.addEventListener("click",()=>toast("Fluxo de instalação do Sentinel Agent iniciado."));
+document.getElementById("addDevice")?.addEventListener("click",()=>toast("Fluxo de instalação do SecurE-Commerce Agent iniciado."));
 document.getElementById("newIncident")?.addEventListener("click",()=>toast("O backend abrirá aqui o fluxo de criação de incidente.","warning"));
 document.getElementById("createKey")?.addEventListener("click",()=>toast("Nova API Key criada para demonstração."));
 document.getElementById("saveWebhook")?.addEventListener("click",()=>toast("Webhook salvo com sucesso."));
 document.getElementById("copyCode")?.addEventListener("click",()=>navigator.clipboard?.writeText(document.querySelector(".code-panel code").innerText).then(()=>toast("Exemplo copiado.")));
 document.querySelectorAll(".copy-key").forEach(b=>b.addEventListener("click",()=>navigator.clipboard?.writeText(b.dataset.copy).then(()=>toast("API Key copiada."))));
-document.getElementById("copyDocsUrl")?.addEventListener("click",()=>navigator.clipboard?.writeText("https://api.sentinelretail.local/docs").then(()=>toast("URL da documentação copiada.")));
+document.getElementById("copyDocsUrl")?.addEventListener("click",()=>navigator.clipboard?.writeText("https://api.securE-commerce.local/docs").then(()=>toast("URL da documentação copiada.")));
 document.getElementById("blockIp")?.addEventListener("click",()=>{toast("IP 185.23.91.14 marcado para bloqueio.","warning");closeModal()});
 document.getElementById("forceReset")?.addEventListener("click",()=>toast("Solicitação de reset enviada ao Identity Engine."));
 document.getElementById("assignIncident")?.addEventListener("click",()=>toast("Incidente atribuído ao usuário atual."));
